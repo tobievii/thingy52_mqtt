@@ -33,6 +33,10 @@ thingy52mqtt.py <MAC_ADDRESS> --no-mqtt --gas --temperature --humidity --pressur
   --battery --orientation --keypress --tap \
   --sleep 5 -v -v -v -v -v
 ```
+```sh 
+Example
+python3 thingy52mqtt.py E9:94:AD:C5:35:55 --no-mqtt --gas --temperature --humidity --color --pressure --battery --orientation --keypress --tap --sleep 10 -v -v -v -v -v -v -v -v -v 
+```
 
 Read some values and publish them via MQTT every minute, do not print debug info.
 The sensor name is appended to the topic-prefix given as parameter.
