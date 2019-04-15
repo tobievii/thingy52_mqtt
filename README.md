@@ -45,3 +45,7 @@ The sensor name is appended to the topic-prefix given as parameter.
 thingy52mqtt.py <MAC_ADDRESS> --temperature --humidity --pressure --battery --sleep 60 \
   --host localhost --port 1883 --topic-prefix /home/thingy52/
 ```
+```sh 
+Example - For prototyper
+python3 thingy52mqtt.py E9:94:AD:C5:35:55 --host localhost --port 1883 --topic-prefix thingy52 --gas --temperature --humidity --color --pressure --battery --orientation --keypress --tap --sleep 10 -v -v -v -v -v -v -v -v -v 
+```
