@@ -163,7 +163,7 @@ def mqttSend(key, value, unit):
                         payload = payload,
                         hostname = args.hostname, 
                         port = args.port, 
-                        retain = True)
+                        retain = True,auth={'username': 'api', 'password': 'key-'})
         except:
             logging.error("Failed to publish message, details follow")
             logging.error("hostname=%s topic=%s payload=%s" % (args.hostname, topic, payload))
