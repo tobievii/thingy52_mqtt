@@ -47,7 +47,7 @@ thingy52mqtt.py <MAC_ADDRESS> --temperature --humidity --pressure --battery --sl
 ```
 ```sh 
 Example - For prototyper
-python3 thingy52mqtt.py E9:94:AD:C5:35:55 --host localhost --port 1883 --topic-prefix thingy52 --gas --temperature --humidity --color --pressure --battery --orientation --keypress --tap --sleep 10
+python3 thingy52mqttIoTnxt.py E9:94:AD:C5:35:55 --host localhost --port 1883 --topic-prefix thingy52 --gas --temperature --humidity --color --pressure --battery --orientation --keypress -device MyNordicDevice -apiKey 123 --tap --sleep 10
 ```
 ```sh 
 Example - For prototyper with logging
