@@ -30,7 +30,7 @@ import argparse
 import binascii
 import logging
 import signal, sys
-
+import json
 next_event_second = 0
 args = None
 thingy = None
@@ -138,11 +138,12 @@ def mqttSendValues(notificationDelegate):
 
 def mqttSend(key, value, unit):
     global args
-
+    
     if value is None:
         logging.debug('no value given, do nothing for key %s' % key)
         return
-
+    data = {"id":args.deviceName,"data":{key:value}}
+    #print(json.dumps(data))
     if isinstance(value, int):
         logging.debug('Sending MQTT messages key %s value %d%s' % (key, value, unit))
     elif isinstance(value, float) | isinstance(value, int):
@@ -156,14 +157,14 @@ def mqttSend(key, value, unit):
         logging.debug('MQTT disabled, not sending message')
     else:
         try:
-            topic = args.topicprefix + key
-            payload = value
+            topic = args.apiKey
+            payload = json.dumps(data)
             logging.debug('MQTT message topic %s, payload %s' % (topic, str(payload)))
             publish.single(topic, 
                         payload = payload,
                         hostname = args.hostname, 
                         port = args.port, 
-                        retain = True,auth={'username': 'api', 'password': 'key-'})
+                        retain = True,auth={'username': 'api', 'password': ('key-'+topic)})
         except:
             logging.error("Failed to publish message, details follow")
             logging.error("hostname=%s topic=%s payload=%s" % (args.hostname, topic, payload))
@@ -319,7 +320,8 @@ def parseArgs():
 
     parser.add_argument("--logfile", help="If specified, will log messages to the given file (default log to terminal)", default=None)
     parser.add_argument("-v", help="Increase logging verbosity (can be used up to 5 times)", action="count", default=0)
-
+    parser.add_argument("-device",dest='deviceName', help="Device name for mqtt publish", default="Nordic52")
+    parser.add_argument("-apiKey",dest='apiKey', help="Your API Key for IoTnxt", default="Nordic52")
     args = parser.parse_args()
     return args
 
